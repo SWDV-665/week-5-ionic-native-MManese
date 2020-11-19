@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      {{titlePage}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Content -->
+<ion-content [fullscreen]="true">
+
+  <!--Header of Page Content-->
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{titlePage}}</ion-title>
+    </ion-toolbar>
+  </ion-header> 
+
+<!--grid used to format page content apperance to size of screen-->
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <!--used card component to encapsulate Grocery list-->
+        <ion-card>
+          <!--header of card-->
+          <ion-card-header>
+            <ion-card-title>{{titleList}}</ion-card-title>
+          </ion-card-header>
+          <!--card content is the grocery list-->
+          <ion-card-content>
+            <ion-list *ngFor="let item of items; let i = index">
+              <!--Each item on the list will have a sliding component-->
+              <ion-item-sliding>
+                <ion-item>
+                  <ion-label>{{item}}</ion-label>
+                  <ion-checkbox slot="start"></ion-checkbox>
+                </ion-item>
+                <!--button options for slide component-->
+                <ion-item-options>
+                  <!--edit button-->
+                  <ion-item-option type="button" color="success" (click)="editItem(item, i)">
+                    <ion-icon slot="bottom" name="create-outline"></ion-icon>
+                    Edit
+                  </ion-item-option>
+                  <!--share button-->
+                  <ion-item-option type="button" color="light" (click)="shareItem(item, i)">
+                    <ion-icon slot="bottom" name="share-social"></ion-icon>
+                    Share
+                  </ion-item-option>
+                  <!--delet button-->
+                  <ion-item-option type="button" color="danger" (click)="removeItem(item, i)">
+                    <ion-icon slot="bottom" name="trash-outline"></ion-icon>
+                    Delete
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+            <!--end of list-->
+            <!--User Grocery Item input-->
+            <ion-item>
+              <!--Input-->
+              <ion-label position="floating">Add Item</ion-label>
+                <ion-input type="string" [(ngModel)]="this.inputItem"></ion-input>
+            </ion-item>
+            <!--Add input to list button-->
+            <div class="ion-margin-vertical ion-text-right">
+              <ion-button (click)="addItem()">
+                <ion-icon slot="start" name="add"></ion-icon>
+                Add Item
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
